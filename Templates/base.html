@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}-todo_app</title>
+</head>
+<body>
+    <div class="navbar nabvar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class ="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">タスク管理</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!--ログイン状態によって、メニューを切り替える-->
+                    {% if g.user %}
+                    <li><a>ようこそ{{ g.user['username'] }}さん！</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">ログアウト</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('auth.create_user') }}">新規ユーザー登録</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">ログイン</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        {% block content %}{% endblock %}
+        <hr />
+        <footer>
+            <p>&copy; {{year}} -タスク管理</p>
+        </footer>
+    </div>
+
+</body>
+</html>

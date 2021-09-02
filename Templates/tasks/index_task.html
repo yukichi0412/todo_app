@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1 style="margin-bottom:50px">タスク一覧</h1>
+
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+
+    <a class="h3" href="{{ url_for('task.create_task') }}">タスクの新規追加</a>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>状態</th>
+                <th>期日</th>
+                <th>編集</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.auther }}</td>
+                <td>{{ task.publisher }}</td>
+                <td>
+                    <a href="{{ url_for('task.update_task', task_id=task.id) }}">編集</a>｜
+                    <a href="{{ url_for('task.delete_task', task_id=task.id) }}">削除</a>
+                </td>
+            </tr>
+            {% else %}
+            <td>タスクが登録されていません</td>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

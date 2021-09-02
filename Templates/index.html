@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+
+    <div class="jumbotron">
+        <h1>タスク管理アプリ</h1>
+        <p class="lead">タスクの登録・閲覧・編集・削除を行うFlaskアプリケーションです</p>
+
+    </div>
+
+
+{% endblock %}
